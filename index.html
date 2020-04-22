@@ -17,43 +17,51 @@
     
 
 
-    <div id="app" class="container">
-        <hr>
-                <div class="row">
-                    <h3>Campeonato Brasileiro - Seria A - 2018</h3>
-                </div>       
-        <hr>
-        
-        <div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Pontos</th>
-                        <th>GM</th>
-                        <th>GS</th>
-                        <th>Saldo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for= "time in times">
-                        <td  ><img :src="time.escudo" alt="">
-                            {{time.nome}}
-                              
-                        </td>
-                        <td>{{time.pontos}}</td>
-                        <td>{{time.gm}}</td>
-                        <td>{{time.gs}}</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
+    <div id="app" class="container">       
+              
+       <div class="row">
+          <div class="col-md-12">
+              <h3 style="text-align: center;">Campeonato Brasileiro - Série A - 2018</h3>
+          </div>
+       </div>
+       <div>           
+       </div>
+       <button class="btn btn-primary" @click="criarNovoJogo">Novo Jogo</button>
+       <input type="text" class="form-control" >
+       <img :src="novoJogo.casa.time ?  novoJogo.casa.time.escudo: ''" alt="">
+       {{ novoJogo.casa.time ? novoJogo.casa.time.nome : '' }}
+       <input type="text" class="form-control" >
+       <img :src="novoJogo.fora.time ?  novoJogo.fora.time.escudo: ''" alt="">
+       {{ novoJogo.fora.time ? novoJogo.fora.time.nome : '' }}
+       
        
 
 
+       <table class="table table-striped">
+           <thead>
+               <tr> 
+                   <th>Nome</th>
+                   <th>Pontos</th>
+                   <th>GM</th>
+                   <th>GS</th>
+                   <th>Saldo</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr v-for="time in times">                   
+                   <td >{{time.nome}}</td>
+                   <td>{{time.pontos}}</td>
+                   <td>{{time.gm}}</td>
+                   <td>{{time.gs}}</td>
+                   <td></td>
+               </tr>
+           </tbody>
+
+
+       </table>
     </div>
+
+    
 
 
   
@@ -61,46 +69,64 @@
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>    
 
-     <!-- //Para Produção
-     production version, optimized for size and speed 
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    
 
     <script>
-      class Time {
-          constructor(nome, escudo){
-              this.nome = nome;
-              this.escudo = escudo;
-              this.pontos = 0;
-              this.gm = 0;
-              this.gs = 0;
-          }
-      }
-      
 
-      var app =  new Vue({
-            el: "#app",
+    class Time{
+            constructor(nome, escudo) {
+                this.nome = nome,
+                this.escudo = escudo,
+                this.pontos = 0,
+                this.gm = 0,
+                this.gs = 0
+            }
+        }
+        
+        new  Vue ({
+            el: '#app',
             data: {
                 times: [
-                new Time('Atetico MG', 'assets/atleticoMineiro.png' ),
-                new Time('Atletico Paranaense', 'assets/atlpr.png' ),
-                new Time('Bahia', 'assets/bahia.png' ),
-                new Time('Corinthians', 'assets/corinthians.png' ),
-                new Time('Flamengo', 'assets/flamengo.png' ),
-                new Time('Fluminense', 'assets/fluminense.png' ),
-                new Time('Fortaleza', 'assets/fortaleza.png' ),
-                new Time('Goias', 'assets/goias.png' ),
-                new Time('Gremio', 'assets/gremio.png' ),
-                new Time('Internacional', 'assets/internacional.png' ),
-                new Time('Palmeiras', 'assets/palmeiras.png' ),
-                new Time('Santos', 'assets/santos.png' ),
-                new Time('Sao Paulo', 'assets/saopaulo.png' ),
-                new Time('Vasco', 'assets/vasco.png' ),
-                ]
+                    new Time('Atetico MG', 'assets/atleticoMineiro.png' ),
+                    new Time('Atletico Paranaense', 'assets/atlpr.png' ),
+                    new Time('Bahia', 'assets/bahia.png' ),
+                    new Time('Corinthians', 'assets/corinthians.png' ),
+                    new Time('Flamengo', 'assets/flamengo.png' ),
+                    new Time('Fluminense', 'assets/fluminense.png' ),
+                    new Time('Fortaleza', 'assets/fortaleza.png' ),
+                    new Time('Goias', 'assets/goias.png' ),
+                    new Time('Gremio', 'assets/gremio.png' ),
+                    new Time('Internacional', 'assets/internacional.png' ),
+                    new Time('Palmeiras', 'assets/palmeiras.png' ),
+                    new Time('Santos', 'assets/santos.png' ),
+                    new Time('Sao Paulo', 'assets/saopaulo.png' ),
+                    new Time('Vasco', 'assets/vasco.png' ),
+                ],
+                novoJogo: {
+                    casa : {
+                        time: null,
+                        gols: 0
+                    },
+                    fora: {
+                        time: null,
+                        gols: 0
+                    }
+                }
+               
             },
             methods:{
-                
+                criarNovoJogo(){
+                    var indiceCasa = Math.floor(Math.random()*14)
+                        indiceFora = Math.floor(Math.random()*14)
+
+                        this.novoJogo.casa.time = this.times[indiceCasa]
+                        this.novoJogo.fora.time = this.times[indiceFora]
+
+                        console.log(this.novoJogo)
+                }
             }
         })
+
     </script>
 </body>
 </html>
