@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campeonato Brasileiro 2018</title> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        img{
+            width:40px;
+            height: 45px;
+        }
+    </style>
+</head>
+<body>
+    
+
+
+    <div id="app" class="container">
+        <hr>
+                <div class="row">
+                    <h3>Campeonato Brasileiro - Seria A - 2018</h3>
+                </div>       
+        <hr>
+        
+        <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Pontos</th>
+                        <th>GM</th>
+                        <th>GS</th>
+                        <th>Saldo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for= "time in times">
+                        <td  ><img :src="time.escudo" alt="">
+                            {{time.nome}}
+                              
+                        </td>
+                        <td>{{time.pontos}}</td>
+                        <td>{{time.gm}}</td>
+                        <td>{{time.gs}}</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+       
+
+
+    </div>
+
+
+  
+     <!-- //Para Desenvolvimento -->
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>    
+
+     <!-- //Para Produção
+     production version, optimized for size and speed 
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+
+    <script>
+      class Time {
+          constructor(nome, escudo){
+              this.nome = nome;
+              this.escudo = escudo;
+              this.pontos = 0;
+              this.gm = 0;
+              this.gs = 0;
+          }
+      }
+      
+
+      var app =  new Vue({
+            el: "#app",
+            data: {
+                times: [
+                new Time('Atetico MG', 'assets/atleticoMineiro.png' ),
+                new Time('Atletico Paranaense', 'assets/atlpr.png' ),
+                new Time('Bahia', 'assets/bahia.png' ),
+                new Time('Corinthians', 'assets/corinthians.png' ),
+                new Time('Flamengo', 'assets/flamengo.png' ),
+                new Time('Fluminense', 'assets/fluminense.png' ),
+                new Time('Fortaleza', 'assets/fortaleza.png' ),
+                new Time('Goias', 'assets/goias.png' ),
+                new Time('Gremio', 'assets/gremio.png' ),
+                new Time('Internacional', 'assets/internacional.png' ),
+                new Time('Palmeiras', 'assets/palmeiras.png' ),
+                new Time('Santos', 'assets/santos.png' ),
+                new Time('Sao Paulo', 'assets/saopaulo.png' ),
+                new Time('Vasco', 'assets/vasco.png' ),
+                ]
+            },
+            methods:{
+                
+            }
+        })
+    </script>
+</body>
+</html>
